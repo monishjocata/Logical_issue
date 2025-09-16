@@ -1,0 +1,16 @@
+name: Gemini Review
+
+on:
+  pull_request:
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Gemini CLI
+        uses: google-github-actions/run-gemini-cli@v0
+        with:
+          args: "pr --diff"   # Gemini reviews the PR code changes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
